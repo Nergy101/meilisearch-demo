@@ -1,6 +1,5 @@
 .vscode/
 
-
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudio,git,angular
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,git,angular
 
@@ -318,15 +317,6 @@ ServiceFabricBackup/
 *.mdf
 *.ldf
 *.ndf
-
-# Business Intelligence projects
-*.rdl.data
-*.bim.layout
-*.bim_*.settings
-*.rptproj.rsuser
-*- [Bb]ackup.rdl
-*- [Bb]ackup ([0-9]).rdl
-*- [Bb]ackup ([0-9][0-9]).rdl
 
 # Microsoft Fakes
 FakesAssemblies/
