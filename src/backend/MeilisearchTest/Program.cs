@@ -16,8 +16,6 @@ Console.WriteLine(documents.SelectMany(x => x.Genres).Count());
 var task = await index.AddDocumentsAsync<Movie>(documents);
 Console.WriteLine("Documents added to index");
 
-
-
 var foundDocuments = await index.SearchAsync<Movie>("abcd", new SearchQuery { Limit = 300 });
 Console.WriteLine(foundDocuments.ProcessingTimeMs);
 Console.WriteLine(foundDocuments.Hits.Count());
