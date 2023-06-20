@@ -1,12 +1,21 @@
+using AutoFixture;
 using MeiliSearchDemo.Search;
 using MeiliSearchDemo.Search.Movies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using AutoFixture;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-//var test = new MovieSearchService();
+var seeder = new MovieSearchService(Options.Create(new SearchOptions()));
+
+await seeder.DeleteAllEntries();
+
+var documents = new Fixture().CreateMany<Movie>(1000);
+
+await seeder.AddEntries(documents);
+
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

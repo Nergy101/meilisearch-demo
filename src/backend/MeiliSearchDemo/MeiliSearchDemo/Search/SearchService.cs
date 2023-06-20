@@ -27,6 +27,11 @@ namespace MeiliSearchDemo.Search
 
             return results.Hits;
         }
+
+        public async Task DeleteAllEntries()
+        {
+            await _index.DeleteAllDocumentsAsync();
+        }
     }
 
     public class SearchOptions

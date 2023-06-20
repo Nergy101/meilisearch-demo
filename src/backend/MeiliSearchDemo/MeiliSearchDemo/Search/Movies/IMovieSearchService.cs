@@ -6,7 +6,8 @@
 
         Task<IEnumerable<Movie>> GetEntries(string searchTerm, int limit);
 
-
         Task AddEntries(IEnumerable<Movie> documents);
+
+        Task DeleteAllEntries();
     }
 }

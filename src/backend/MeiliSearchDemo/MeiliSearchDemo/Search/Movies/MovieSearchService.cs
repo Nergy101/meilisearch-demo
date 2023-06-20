@@ -7,7 +7,7 @@ namespace MeiliSearchDemo.Search.Movies
         public MovieSearchService(IOptions<SearchOptions> options) : base(options)
         { }
 
-        public override string IndexName => "Movies";
+        public override string IndexName => "movies";
     }
 
     public class Movie
