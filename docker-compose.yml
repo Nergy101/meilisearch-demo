@@ -14,9 +14,13 @@ services:
     environment:
       - MEILI_URL="${MEILI_URL}"
       - MEILI_MASTER_KEY="${MEILI_MASTER_KEY}"
+    depends_on:
+      - search
   frontend:
     image: meili-frontend:v1
     ports:
       - ${FRONTEND_PORT}:${FRONTEND_PORT}
     environment:
       - BACKEND_URL="${BACKEND_URL}"
+    depends_on:
+      - backend

@@ -15,10 +15,9 @@ namespace MeiliSearchDemo.Search
             _index = _meilisearchClient.Index(IndexName);
         }
 
-
         public async Task AddEntries(IEnumerable<T> documents)
         {
-            await _index.AddDocumentsAsync(documents);
+            var info = await _index.AddDocumentsAsync(documents);
         }
 
         public async Task<IEnumerable<T>> GetEntries(string searchTerm, int limit = 300)

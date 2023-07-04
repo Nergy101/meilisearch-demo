@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
+import {Component, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {MatTableModule} from '@angular/material/table';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {Movie} from "../models/movie";
 
 @Component({
   selector: 'result-card',
@@ -13,5 +14,5 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class ResultCardComponent {
   @Input()
-  item: any;
+  item?: Movie;
 }

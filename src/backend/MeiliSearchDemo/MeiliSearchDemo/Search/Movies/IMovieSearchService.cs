@@ -4,9 +4,9 @@
     {
         string IndexName { get; }
 
-        Task<IEnumerable<Movie>> GetEntries(string searchTerm, int limit);
+        Task<IEnumerable<MovieDTO>> GetEntries(string searchTerm, int limit);
 
-        Task AddEntries(IEnumerable<Movie> documents);
+        Task AddEntries(IEnumerable<MovieDTO> documents);
 
         Task DeleteAllEntries();
     }

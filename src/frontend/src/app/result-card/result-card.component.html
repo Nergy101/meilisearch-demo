@@ -1,12 +1,14 @@
-<mat-card style="padding: 1rem">
-  <mat-card-header> {{ item?.title }} </mat-card-header>
+<mat-card>
+  <mat-card-header>
+    <h2> {{ item?.title }} ({{ item?.year }}) </h2>
+  </mat-card-header>
   <mat-card-content>
-    <pre> {{ item | json }}</pre>
+    <div>
+      Rating: {{ item?.rating?.rating }}/10 | Votes: {{ item?.rating?.votes }}
+    </div>
   </mat-card-content>
-  <mat-card-actions
-    style="display: flex; justify-content: space-between; margin-top: 1rem"
+  <mat-card-actions style="display: flex; justify-content: flex-end; margin-top: 1rem"
   >
-    <button mat-raised-button color="accent">Open</button>
     <button mat-stroked-button color="accent">Hide</button>
   </mat-card-actions>
 </mat-card>

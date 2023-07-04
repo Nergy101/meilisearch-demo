@@ -1,7 +1,7 @@
 <div class="container">
   <mat-card class="search">
     <mat-card-content>
-      <search-bar [(searchTerm)]="searchTerm"></search-bar>
+      <search-bar [options]="searchOptions()" [searchTerm]="searchTerm()" (searchTermChange)="onSearchTermChange($event)"></search-bar>
     </mat-card-content>
     <mat-card-footer align="center">Powered By Meilisearch</mat-card-footer>
   </mat-card>

@@ -7,7 +7,6 @@
 .container {
   flex: 1;
   margin: 1em;
-  // display: flex;
 
   flex-direction: column;
   gap: 1em;
@@ -22,7 +21,7 @@
     gap: 2em;
 
     .result {
-      flex-basis: 49%;
+      flex-basis: 32%;
       gap: 2em;
     }
   }

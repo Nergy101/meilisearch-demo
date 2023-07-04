@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Observable, from, map, startWith, tap } from 'rxjs';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Observable, from, map, startWith, tap} from 'rxjs';
 
 @Component({
   selector: 'search-bar',
@@ -21,6 +21,10 @@ import { Observable, from, map, startWith, tap } from 'rxjs';
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent implements OnInit {
+
+  @Input()
+  options: string[] = ['Super Hero', 'A Hero', 'Heroes beating villains!'];
+
   @Input()
   searchTerm = '';
 
@@ -29,7 +33,7 @@ export class SearchBarComponent implements OnInit {
 
   myControl: FormControl<string | null> | undefined;
 
-  options: string[] = ['Super Hero', 'Man is a hero', 'Heroes going berserk!'];
+
   filteredOptions: Observable<string[]> = from([]);
 
   ngOnInit() {
