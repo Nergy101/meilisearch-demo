@@ -1,0 +1,22 @@
+services:
+  search:
+    image: getmeili/meilisearch:v1.2
+    ports:
+      - 7700:7700
+    volumes:
+      - ./data/meili_data:/meili_data
+    environment:
+      - MEILI_MASTER_KEY="${MEILI_MASTER_KEY}"
+  backend:
+    image: meili-backend:v1
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+    environment:
+      - MEILI_URL="${MEILI_URL}"
+      - MEILI_MASTER_KEY="${MEILI_MASTER_KEY}"
+  frontend:
+    image: meili-frontend:v1
+    ports:
+      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+    environment:
+      - BACKEND_URL="${BACKEND_URL}"

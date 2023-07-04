@@ -1,0 +1,12 @@
+<mat-card style="padding: 1rem">
+  <mat-card-header> {{ item?.title }} </mat-card-header>
+  <mat-card-content>
+    <pre> {{ item | json }}</pre>
+  </mat-card-content>
+  <mat-card-actions
+    style="display: flex; justify-content: space-between; margin-top: 1rem"
+  >
+    <button mat-raised-button color="accent">Open</button>
+    <button mat-stroked-button color="accent">Hide</button>
+  </mat-card-actions>
+</mat-card>

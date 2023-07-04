@@ -1,0 +1,34 @@
+:host {
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 1;
+}
+
+.container {
+  flex: 1;
+  margin: 1em;
+  // display: flex;
+
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+
+  &.results {
+    flex: 1;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 2em;
+
+    .result {
+      flex-basis: 49%;
+      gap: 2em;
+    }
+  }
+}
+
+.search {
+  display: flex;
+  flex: 1 1 100%;
+}

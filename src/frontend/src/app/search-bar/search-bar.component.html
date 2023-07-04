@@ -1,0 +1,21 @@
+<form class="example-form" *ngIf="myControl">
+  <mat-form-field class="full-width">
+    <mat-label>Search</mat-label>
+    <input
+      type="text"
+      placeholder="Some Subject..."
+      aria-label="Fruit"
+      matInput
+      [formControl]="myControl"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option
+        *ngFor="let option of filteredOptions | async"
+        [value]="option"
+      >
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

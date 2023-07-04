@@ -1,0 +1,18 @@
+<div class="container">
+  <mat-card class="search">
+    <mat-card-content>
+      <search-bar [(searchTerm)]="searchTerm"></search-bar>
+    </mat-card-content>
+    <mat-card-footer align="center">Powered By Meilisearch</mat-card-footer>
+  </mat-card>
+</div>
+
+<div class="container results" *ngIf="!loading">
+  <mat-card class="result" *ngFor="let movie of movies()">
+    <result-card [item]="movie"></result-card>
+  </mat-card>
+</div>
+
+<div class="container">
+  <loading *ngIf="loading"></loading>
+</div>
