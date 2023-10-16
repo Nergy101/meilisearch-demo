@@ -13,16 +13,17 @@
   align-items: center;
 
   &.results {
-    flex: 1;
-
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    gap: 2em;
+    align-items: stretch;
 
     .result {
       flex-basis: 32%;
-      gap: 2em;
+      .result-card {
+        flex: 1;
+        display:flex;
+      }
     }
   }
 }

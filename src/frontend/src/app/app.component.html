@@ -3,13 +3,13 @@
     <mat-card-content>
       <search-bar [options]="searchOptions()" [searchTerm]="searchTerm()" (searchTermChange)="onSearchTermChange($event)"></search-bar>
     </mat-card-content>
-    <mat-card-footer align="center">Powered By Meilisearch</mat-card-footer>
+    <mat-card-footer align="center">Meilisearch Demo</mat-card-footer>
   </mat-card>
 </div>
 
 <div class="container results" *ngIf="!loading">
   <mat-card class="result" *ngFor="let movie of movies()">
-    <result-card [item]="movie"></result-card>
+    <result-card class="result-card" [item]="movie"></result-card>
   </mat-card>
 </div>
 
