@@ -1,5 +1,5 @@
 # Use the official image as a parent image.
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS build-env
 
 # Set the working directory.
 WORKDIR /app
@@ -12,7 +12,8 @@ RUN dotnet restore
 RUN dotnet publish -c Release -o out
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0
+FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine
 WORKDIR /app
 COPY --from=build-env /app/MeiliSearchDemo/out .
+
 ENTRYPOINT ["dotnet", "MeiliSearchDemo.dll"]
