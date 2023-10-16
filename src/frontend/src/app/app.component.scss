@@ -1,5 +1,4 @@
 :host {
-  display: flex;
   flex-flow: column nowrap;
   flex: 1;
 }
@@ -31,4 +30,12 @@
 .search {
   display: flex;
   flex: 1 1 100%;
+}
+
+.loader {
+  margin: 10em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
