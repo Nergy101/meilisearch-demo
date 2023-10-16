@@ -18,7 +18,7 @@ export class ResultCardComponent {
   item?: Movie;
 
   public onSearch(): void {
-    const googleSearchURL = `https://www.google.com/search?q=${this.item?.title}`;
+    const googleSearchURL = `https://www.google.com/search?q=${this.item?.title} ${this.item?.year} movie`;
 
     window.location.href = googleSearchURL
   }

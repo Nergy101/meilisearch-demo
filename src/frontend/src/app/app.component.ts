@@ -30,7 +30,7 @@ import { environment } from 'src/environments/environment';
 export class AppComponent implements OnInit {
   title = 'meilisearch-client-demo';
   baseUrl = environment.apiUrl;
-  loading = false;
+  loading = true;
 
   apiState = signal<'✅' | '❌' | '❌🔁' | '🔁'>('🔁');
   moviesCount = signal<number>(0);
@@ -42,7 +42,9 @@ export class AppComponent implements OnInit {
 
   constructor(private readonly httpClient: HttpClient) {
     effect(async () => {
+      this.loading = true;
       await this.setMovies(this.searchTerm());
+      this.loading = false;
     }, { allowSignalWrites: true });
 
     effect(() => {
@@ -51,6 +53,7 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.loading = true;
     const fetchData = async () => {
       lastValueFrom(this.httpClient.get(`${this.baseUrl}/health`, { responseType: 'text' }))
         .then(async state => {
@@ -61,12 +64,14 @@ export class AppComponent implements OnInit {
 
             const totalMoviesCount = Number.parseInt(await lastValueFrom(this.httpClient.get(`${this.baseUrl}/movies/count`, { responseType: 'text' })));
             this.moviesCount.set(totalMoviesCount);
+            this.loading = false;
             clearInterval(this.intervalId);
           } else {
             this.apiState.set('❌');
           }
         }).catch(_ => {
           this.apiState.set('❌🔁');
+          this.loading = true;
         });
 
     }
