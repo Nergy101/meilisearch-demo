@@ -1,12 +1,17 @@
 services:
   search:
-    image: getmeili/meilisearch:v1.2
+    image: getmeili/meilisearch:v1.4
     ports:
       - 7700:7700
     volumes:
       - ./data/meili_data:/meili_data
     environment:
-      - MEILI_MASTER_KEY="${MEILI_MASTER_KEY}"
+      - MEILI_MASTER_KEY=_8ru_e8rwXWpeVZgAr-P8V_8wCFzQYb99AHWB52jzFY
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - MEILI_HTTP_ADDR=0.0.0.0:7700
+      - MEILI_SERVER_PROVIDER=docker
+      - MEILI_ENV=production
+      - MEILI_NO_ANALYTICS=true
   backend:
     image: meili-backend:v1
     ports:

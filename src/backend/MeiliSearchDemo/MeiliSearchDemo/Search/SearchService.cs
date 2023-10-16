@@ -7,13 +7,14 @@ namespace MeiliSearchDemo.Search
     {
         private readonly MeilisearchClient _meilisearchClient;
         private readonly Meilisearch.Index _index;
-        public abstract string IndexName { get; }
 
         public SearchService(IOptions<SearchOptions> options)
         {
             _meilisearchClient = new MeilisearchClient(options.Value.SearchEndpoint, options.Value.SearchApiKey);
             _index = _meilisearchClient.Index(IndexName);
         }
+
+        public abstract string IndexName { get; }
 
         public async Task AddEntries(IEnumerable<T> documents)
         {
@@ -35,7 +36,7 @@ namespace MeiliSearchDemo.Search
 
     public class SearchOptions
     {
-        public string SearchEndpoint { get; set; } = "http://localhost:7700";
-        public string SearchApiKey { get; set; } = "MASTER_KEY";
+        public string? SearchEndpoint { get; set; }
+        public string? SearchApiKey { get; set; }
     }
 }
