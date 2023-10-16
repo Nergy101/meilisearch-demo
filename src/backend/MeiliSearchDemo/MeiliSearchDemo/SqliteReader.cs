@@ -12,7 +12,6 @@ public static class SqliteReader
 
         connection.Open();
 
-
         return (GetMovies(connection), GetRatings(connection));
     }
 

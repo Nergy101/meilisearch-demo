@@ -1,9 +1,13 @@
 <div class="container">
   <mat-card class="search">
     <mat-card-content>
-      <search-bar [options]="searchOptions()" [searchTerm]="searchTerm()" (searchTermChange)="onSearchTermChange($event)"></search-bar>
+      <search-bar [options]="searchOptions()" [searchTerm]="searchTerm()"
+        (searchTermChange)="onSearchTermChange($event)"></search-bar>
     </mat-card-content>
-    <mat-card-footer align="center">Meilisearch Demo</mat-card-footer>
+    <mat-card-footer align="center">Meilisearch Demo
+      (<span>{{ apiState() }}</span>
+      <span *ngIf="moviesCount() > 0"> loaded {{moviesCount() }} items</span>)
+    </mat-card-footer>
   </mat-card>
 </div>
 

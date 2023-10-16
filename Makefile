@@ -14,7 +14,6 @@ local-run-backend:
 local-run-frontend:
 	cd src/frontend && npm run start
 
-
 clean-local-db:
 	rm -rf data/
 
