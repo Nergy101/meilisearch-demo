@@ -17,21 +17,23 @@ var searchOptions = new SearchOptions
 
 if (builder.Environment.IsDevelopment())
 {
-    builder.Configuration.AddJsonFile("appsettings.Development.json", optional: true);
+    // builder.Configuration.AddJsonFile("appsettings.Development.json", optional: true);
 
     searchOptions.SearchEndpoint = "http://localhost:7700";
 }
 else
 {
-    builder.Configuration.AddJsonFile("appsettings.json");
+    // builder.Configuration.AddJsonFile("appsettings.json");
     searchOptions.SearchEndpoint = "http://search:7700";
 }
+
+var iSearchOptions = Options.Create(searchOptions);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 #pragma warning disable S1854 // Unused assignments should be removed
-builder.Services.Configure<SearchOptions>(o => o = searchOptions);
+builder.Services.AddSingleton<IOptions<SearchOptions>>(iSearchOptions);
 #pragma warning restore S1854 // Unused assignments should be removed
 builder.Services.AddTransient<IMovieSearchService, MovieSearchService>();
 builder.Services.AddCors(options =>
@@ -46,7 +48,7 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Seed data
-var seeder = new MovieSearchService(Options.Create(searchOptions));
+var seeder = new MovieSearchService(iSearchOptions);
 await seeder.DeleteAllEntries();
 
 var (movies, ratings) = SqliteReader.ReadFromPath("./assets/movies.db");
