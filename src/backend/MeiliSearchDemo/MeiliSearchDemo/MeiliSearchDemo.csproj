@@ -12,7 +12,7 @@
     </None>
 </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
         <PackageReference Include="Meilisearch" Version="0.14.2" />
         <PackageReference Include="AutoFixture" Version="4.18.0" />
