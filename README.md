@@ -22,18 +22,18 @@ Before you get started, make sure you have the following prerequisites installed
 
 Clone this repository to your local machine:
 ```bash
-git clone https://github.com/yourusername/meilisearch-demo.git
+git clone https://github.com/Nergy101/meilisearch-demo
 cd meilisearch-demo
 ```
 
 
-To start MeiliSearch, run the following command:
+To build the required docker images run the following command:
 
 ```bash
 make
 ```
 
-This creates the required docker images locally
+This creates the required docker images locally.
 
 If you want to start MeiliSearch along with a companion service (e.g., a front-end app), use the following command:
 
