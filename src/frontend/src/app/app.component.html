@@ -1,22 +1,32 @@
 <div class="container">
   <mat-card class="search">
     <mat-card-content>
-      <search-bar [options]="searchOptions()" [searchTerm]="searchTerm()"
-        (searchTermChange)="onSearchTermChange($event)"></search-bar>
+      <search-bar
+        [options]="searchOptions()"
+        [searchTerm]="searchTerm()"
+        (searchTermChange)="onSearchTermChange($event)"
+      ></search-bar>
     </mat-card-content>
-    <mat-card-footer align="center">Meilisearch Demo
-      (<span>{{ apiState() }}</span>
-      <span *ngIf="moviesCount() > 0"> loaded {{moviesCount() }} items</span>)
+    <mat-card-footer align="center"
+      >Meilisearch Demo (<span>{{ moviesService.moviesApiState() }}</span>
+      <span *ngIf="moviesService.totalMoviesCount() > 0">
+        loaded {{ moviesService.totalMoviesCount() }} items</span
+      >)
+      <br />
+      <span
+        >Showing {{ moviesService.moviesCount() }} of
+        {{ moviesService.totalMoviesCount() }}</span
+      >
     </mat-card-footer>
   </mat-card>
 </div>
 
-<div class="container results" *ngIf="!loading">
-  <mat-card class="result" *ngFor="let movie of movies()">
+<div class="container results" *ngIf="!loadingService.loading()">
+  <mat-card class="result" *ngFor="let movie of moviesService.movies()">
     <result-card class="result-card" [item]="movie"></result-card>
   </mat-card>
 </div>
 
-<div class="loader">
-  <loading *ngIf="loading"></loading>
+<div class="loader" *ngIf="loadingService.loading()">
+  <loading></loading>
 </div>

@@ -1,7 +1,7 @@
-﻿using MeiliSearchDemo.Search.Movies;
+﻿using Core.Search.Movies;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace MeiliSearchDemo
+namespace MeiliSearchDemo.HealthChecks
 {
     public class MeiliSearchHealthCheck : IHealthCheck
     {

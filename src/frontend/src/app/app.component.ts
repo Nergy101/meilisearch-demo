@@ -6,20 +6,20 @@ import { MatDividerModule } from '@angular/material/divider';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { ResultCardComponent } from './result-card/result-card.component';
 import { LoadingComponent } from './loading/loading.component';
-import { HttpClient, HttpClientModule } from "@angular/common/http";
-import { catchError, interval, lastValueFrom, map, of, switchMap, tap, timer } from "rxjs";
-import { Movie } from "./models/movie";
-import { environment } from 'src/environments/environment';
-
+import { debounceTime, tap } from 'rxjs';
+import { MoviesService } from './movies.service';
+import { LoadingService } from './loading.service';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule,
-    HttpClientModule,
     RouterOutlet,
+    CommonModule,
     MatCardModule,
     MatDividerModule,
+    MatSnackBarModule,
     SearchBarComponent,
     ResultCardComponent,
     LoadingComponent,
@@ -29,65 +29,55 @@ import { environment } from 'src/environments/environment';
 })
 export class AppComponent implements OnInit {
   title = 'meilisearch-client-demo';
-  baseUrl = environment.apiUrl;
-  loading = true;
 
-  apiState = signal<'✅' | '❌' | '❌🔁' | '🔁'>('🔁');
-  moviesCount = signal<number>(0);
-  movies = signal<Movie[]>([]);
   searchTerm = signal('Story');
   searchOptions = signal<string[]>([]);
 
-  intervalId: any = undefined;
-
-  constructor(private readonly httpClient: HttpClient) {
-    effect(async () => {
-      this.loading = true;
-      await this.setMovies(this.searchTerm());
-      this.loading = false;
-    }, { allowSignalWrites: true });
-
+  constructor(
+    public readonly loadingService: LoadingService,
+    public readonly moviesService: MoviesService,
+    private readonly snackbar: MatSnackBar
+  ) {
+    // apiState is OK
     effect(() => {
-      this.searchOptions.set(this.movies().map(m => `${m.title} (${m.year})`));
-    }, { allowSignalWrites: true });
+      if (this.moviesService.moviesApiState() == '✅') {
+        this.snackbar.open('Movies-API returned Healthy✅!', 'Dismiss', {
+          horizontalPosition: 'end',
+          verticalPosition: 'bottom',
+        });
+      }
+    });
+
+    // get movies every time we change the searchTerm with debounce
+    var searchTermDebounce = toObservable(this.searchTerm);
+    searchTermDebounce
+      .pipe(
+        takeUntilDestroyed(), // takes care of cleaning up the subscription
+        tap(() => this.loadingService.loading.set(true)),
+        debounceTime(300),
+        tap(async (val) => {
+          await this.moviesService.getMovies(val);
+        })
+      )
+      .subscribe();
+
+    // change the dropdown-items everytime the movies-set changes
+    effect(
+      () => {
+        this.searchOptions.set(
+          this.moviesService.movies().map((m) => `${m.title} (${m.year})`)
+        );
+      },
+      { allowSignalWrites: true } // allows writing to the signal this.searchOptions
+    );
   }
 
   async ngOnInit(): Promise<void> {
-    this.loading = true;
-    const fetchData = async () => {
-      lastValueFrom(this.httpClient.get(`${this.baseUrl}/health`, { responseType: 'text' }))
-        .then(async state => {
-          if (state == "Healthy") {
-            this.apiState.set('✅');
-
-            await this.setMovies(this.searchTerm());
-
-            const totalMoviesCount = Number.parseInt(await lastValueFrom(this.httpClient.get(`${this.baseUrl}/movies/count`, { responseType: 'text' })));
-            this.moviesCount.set(totalMoviesCount);
-            this.loading = false;
-            clearInterval(this.intervalId);
-          } else {
-            this.apiState.set('❌');
-          }
-        }).catch(_ => {
-          this.apiState.set('❌🔁');
-          this.loading = true;
-        });
-
-    }
-    fetchData();
-
-    this.intervalId = setInterval(fetchData, 3000);
+    // polls repeatedly until API response is Healthy
+    this.moviesService.checkHealth();
   }
 
   async onSearchTermChange(searchTerm: string): Promise<void> {
     this.searchTerm.set(searchTerm);
-  }
-
-  private async setMovies(searchTerm: string): Promise<void> {
-    const movies: Movie[] = await lastValueFrom(
-      this.httpClient.get<Movie[]>(`${this.baseUrl}/search?query=${searchTerm}`)
-    );
-    this.movies.set(movies);
   }
 }

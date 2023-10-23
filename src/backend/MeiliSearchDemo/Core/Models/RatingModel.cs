@@ -1,6 +1,6 @@
 using MapDataReader;
 
-namespace MeiliSearchDemo.Search.Movies;
+namespace Core.Models;
 
 [GenerateDataReaderMapper]
 public class RatingModel

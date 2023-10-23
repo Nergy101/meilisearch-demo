@@ -1,7 +1,7 @@
 ﻿using Meilisearch;
 using Microsoft.Extensions.Options;
 
-namespace MeiliSearchDemo.Search
+namespace Core.Search
 {
     public abstract class SearchService<T> where T : class
     {
@@ -27,7 +27,7 @@ namespace MeiliSearchDemo.Search
             return stats.NumberOfDocuments;
         }
 
-        public async Task<IEnumerable<T>> GetEntries(string searchTerm, int limit = 300)
+        public async Task<IEnumerable<T>> GetEntries(string searchTerm, int limit = 100)
         {
             var results = await _index.SearchAsync<T>(searchTerm, new SearchQuery { Limit = limit });
 
@@ -38,11 +38,5 @@ namespace MeiliSearchDemo.Search
         {
             await _index.DeleteAllDocumentsAsync();
         }
-    }
-
-    public class SearchOptions
-    {
-        public string? SearchEndpoint { get; set; }
-        public string? SearchApiKey { get; set; }
     }
 }

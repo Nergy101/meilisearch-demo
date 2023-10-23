@@ -1,8 +1,8 @@
+using Core.Models;
 using MapDataReader;
-using MeiliSearchDemo.Search.Movies;
 using Microsoft.Data.Sqlite;
 
-namespace MeiliSearchDemo;
+namespace Infrastructure;
 
 public static class SqliteReader
 {

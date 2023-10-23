@@ -1,24 +1,30 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-    <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <UserSecretsId>34c06a39-72b6-46bc-83a1-6661859a6430</UserSecretsId>
-    </PropertyGroup>
-<ItemGroup>
-    <None Update="./assets/*.*">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-</ItemGroup>
-    <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-        <PackageReference Include="Meilisearch" Version="0.14.2" />
-        <PackageReference Include="AutoFixture" Version="4.18.0" />
-        <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.8" />
-        <PackageReference Include="MapDataReader" Version="1.0.11" />
-    </ItemGroup>
-
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>34c06a39-72b6-46bc-83a1-6661859a6430</UserSecretsId>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Update="./assets/*.*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="dbup-core" Version="5.0.37" />
+		<PackageReference Include="dbup-sqlite" Version="5.0.37" />
+		<PackageReference Include="dbup-sqlserver" Version="5.0.37" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		<PackageReference Include="Meilisearch" Version="0.14.5" />
+		<PackageReference Include="AutoFixture" Version="4.18.0" />
+		<PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.12" />
+		<PackageReference Include="MapDataReader" Version="1.0.11" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Core\Core.csproj" />
+	  <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+	</ItemGroup>
 </Project>
 
