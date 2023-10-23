@@ -17,6 +17,7 @@ import { MoviesService } from './movies.service';
 import { LoadingService } from './loading.service';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Movie } from './models/movie';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -86,5 +87,15 @@ export class AppComponent implements OnInit {
 
   async onSearchTermChange(searchTerm: string): Promise<void> {
     this.searchTerm.set(searchTerm);
+  }
+
+  async onHide(movieId: number): Promise<void> {
+    this.moviesService.movies.mutate((movies) => {
+      const movieToFind = movies.find((x) => x.id == movieId);
+
+      if (movieToFind) {
+        movies.splice(movies.indexOf(movieToFind), 1);
+      }
+    });
   }
 }

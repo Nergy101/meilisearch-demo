@@ -1,14 +1,18 @@
 <mat-card>
   <mat-card-header>
-    <h2> {{ item?.title }} ({{ item?.year }}) </h2>
+    <h2>{{ item?.title }} ({{ item?.year }})</h2>
   </mat-card-header>
   <mat-card-content>
     <div>
       Rating: {{ item?.rating?.rating }}/10 | Votes: {{ item?.rating?.votes }}
     </div>
   </mat-card-content>
-  <mat-card-actions style="display: flex; justify-content: flex-end; margin-top: 1rem"
+  <mat-card-actions
+    style="display: flex; justify-content: space-between; margin-top: 1rem"
   >
-    <button mat-stroked-button color="accent" (click)="onSearch()">Search</button>
+    <button mat-button color="warn" (click)="onHideClicked()">Hide</button>
+    <button mat-stroked-button color="accent" (click)="onSearch()">
+      Search
+    </button>
   </mat-card-actions>
 </mat-card>

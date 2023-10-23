@@ -24,7 +24,7 @@ export class MoviesService {
   ) {
     // clear interval once apiState is OK
     effect(() => {
-      let state = this.moviesApiState();
+      const state = this.moviesApiState();
       console.info(`Movies API responded: ${state}`);
 
       if (state == '✅') {
@@ -78,9 +78,8 @@ export class MoviesService {
       return;
     }
 
-    this.loadingService.loading.set(true);
-
     try {
+      this.loadingService.loading.set(true);
       const movies: Movie[] = await lastValueFrom(
         this.httpClient.get<Movie[]>(
           `${this.baseUrl}/movies/search?query=${searchTerm}`

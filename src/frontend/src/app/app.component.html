@@ -23,7 +23,11 @@
 
 <div class="container results" *ngIf="!loadingService.loading()">
   <mat-card class="result" *ngFor="let movie of moviesService.movies()">
-    <result-card class="result-card" [item]="movie"></result-card>
+    <result-card
+      class="result-card"
+      [item]="movie"
+      (onHide)="onHide($event)"
+    ></result-card>
   </mat-card>
 </div>
 
