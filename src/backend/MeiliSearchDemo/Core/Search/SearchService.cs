@@ -29,7 +29,11 @@ namespace Core.Search
 
         public async Task<IEnumerable<T>> GetEntries(string searchTerm, int limit = 100)
         {
-            var results = await _index.SearchAsync<T>(searchTerm, new SearchQuery { Limit = limit });
+            var results = await _index.SearchAsync<T>(searchTerm, new SearchQuery
+            {
+                Limit = limit,
+                MatchingStrategy = "last" // all || last
+            });
 
             return results.Hits;
         }
