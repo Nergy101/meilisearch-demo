@@ -89,7 +89,7 @@ namespace Infrastructure
         {
             var upgradeEngine = DeployChanges.To
                 .SQLiteDatabase(demoDbConnectionString)
-                .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
+                .WithScriptsEmbeddedInAssembly(typeof(DemoSeeder).Assembly)
                 .LogToConsole()
                 .LogScriptOutput()
                 .JournalToSQLiteTable("MigrationHistory")
