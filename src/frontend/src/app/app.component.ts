@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
     // apiState is OK
     effect(() => {
       if (this.moviesService.moviesApiState() == '✅') {
-        this.snackbar.open('Movies-API returned Healthy✅!', 'Dismiss', {
+        this.snackbar.open('✅ Movies-API is up!', '❌', {
           horizontalPosition: 'end',
           verticalPosition: 'bottom',
         });
