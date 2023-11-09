@@ -4,7 +4,7 @@
       <search-bar
         [options]="searchOptions()"
         [searchTerm]="searchTerm()"
-        (searchTermChange)="onSearchTermChange($event)"
+        (searchTermChange)="this.searchTerm.set($event)"
       ></search-bar>
     </mat-card-content>
     <mat-card-footer align="center"

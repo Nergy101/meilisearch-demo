@@ -62,8 +62,9 @@ export class AppComponent implements OnInit {
       .pipe(
         takeUntilDestroyed(), // takes care of cleaning up the subscription
         tap(() => this.loadingService.loading.set(true)),
-        debounceTime(300),
+        debounceTime(1000),
         tap(async (val) => {
+          console.log("debounce", val)
           await this.moviesService.getMovies(val);
         })
       )
@@ -83,10 +84,6 @@ export class AppComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     // polls repeatedly until API response is Healthy
     this.moviesService.checkHealth();
-  }
-
-  async onSearchTermChange(searchTerm: string): Promise<void> {
-    this.searchTerm.set(searchTerm);
   }
 
   async onHide(movieId: number): Promise<void> {
