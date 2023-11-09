@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit, WritableSignal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
@@ -25,25 +25,26 @@ export class SearchBarComponent implements OnInit {
   @Input()
   options: string[] = ['Super Hero', 'A Hero', 'Heroes beating villains!'];
 
-  @Input()
-  searchTerm = '';
+  // @Input()
+  // searchTerm = '';
+  // @Output()
+  // searchTermChange = new EventEmitter<string>();
 
-  @Output()
-  searchTermChange = new EventEmitter<string>();
+  @Input({required: true})
+  searchTerm: WritableSignal<string>;
 
   myControl: FormControl<string | null> | undefined;
-
 
   filteredOptions: Observable<string[]> = from([]);
 
   ngOnInit() {
-    this.myControl = new FormControl(this.searchTerm);
+    this.myControl = new FormControl(this.searchTerm());
 
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         tap((val) => {
-          this.searchTerm = val ?? '';
-          this.searchTermChange.emit(val ?? '');
+          this.searchTerm.set(val ?? '');
+          // this.searchTermChange.emit(val ?? '');
         })
       )
       .pipe(
